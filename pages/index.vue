@@ -1,23 +1,14 @@
-<template>
-  <div>
-    <h1>teste</h1>
-    <MyButton />
-    <p>{{ clicks }}</p>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'contato',
-  data() {
-    return {
-      clicks: null
-    }
-  },
-  async created() {
-    const response = await $fetch('/api/whatsapp-clicks')
-    console.log(response)
-    this.clicks = response.api
-  },
+<script setup>
+const handleClick = async () => {
+  const res = await fetch('/api/count', {
+    method: 'POST',
+    body: JSON.stringify({}),
+  })
+  const data = await res.json()
+  console.log(data)
 }
 </script>
+
+<template>
+  <button @click="handleClick">Click me</button>
+</template>
